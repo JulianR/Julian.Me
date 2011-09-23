@@ -1,0 +1,33 @@
+﻿body {
+}
+
+.stackoverflow
+{
+  background-color: #30B3FF;
+}
+
+img.logo
+{
+  position: relative;
+  left: 10px;
+  top: 10px;
+}
+
+span.stackoverflow-reputation
+{
+  font-size: 5em;
+  position: relative;
+  left: 10px;
+  top: 10px;
+}
+
+div.stackoverflow-slider
+{
+  position: relative;
+  
+}
+
+div.stackoverflow-slider div
+{
+  height: 150px;
+}

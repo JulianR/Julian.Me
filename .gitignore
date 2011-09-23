@@ -1,0 +1,7 @@
+*.dll 
+*/bin/*
+*/obj/*
+TestResults/*
+*.testsettings
+*/Scripts/tiny_mce/*
+*/Content/themes/*

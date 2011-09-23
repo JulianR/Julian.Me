@@ -1,0 +1,85 @@
+﻿@helper SiteSectionLink(string action, string controller, string display, object routeValues = null)
+  {
+  <li>
+    <h1>
+      <a class="site-section" href="@Url.Action(action, controller, routeValues)">@display</a>
+    </h1>
+  </li>
+}
+@{
+  var previousClass = ViewBag.PreviousViewClass;
+  var newClass = ViewBag.ViewClass;
+  var error = TempData["Error"] as string;
+}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>@ViewBag.Title</title>
+  <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/site.css")" />
+  <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/contact.css")" />
+  <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/about.css")" />
+  <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/blog.css")" />
+  <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/portfolio.css")" />
+  <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/home.css")" />
+  <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/stackoverflow.css")" />
+  <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.6.1.js")"></script>
+  <script type="text/javascript" src="@Url.Content("~/Scripts/CSSAnimation.js")"></script>
+  <script type="text/javascript" src="@Url.Content("~/Scripts/CSSAnimation.jQuery.js")"></script>
+  <script type="text/javascript" src="@Url.Content("~/Scripts/Scripts.js")"></script>
+  @if (previousClass != newClass)
+  {
+    <script type="text/javascript">
+      $(function () {
+
+        $body = $('body');
+
+        $body.setTransition({
+          property: 'background-color, color',
+          'timing-function': 'ease-in',
+          duration: '0.5s',
+          delay: '0ms'
+        });
+
+        setTimeout(function () {
+
+          $body.removeClass('@previousClass');
+          $body.addClass('@newClass');
+        }, 100);
+
+      });
+
+    </script>
+  }
+</head>
+<body class="@previousClass">
+  @if (!string.IsNullOrEmpty(error))
+  { 
+    <div id="error-notification">
+      <p>
+        @error
+      </p>
+    </div>
+    <script type="text/javascript">
+      $(function () {
+        $('div#error-notification').fadeIn().click(function () {
+          $(this).fadeOut();
+        });
+      });
+    </script>
+  }
+  <header>
+    <nav id="main-navigation">
+      <ul>
+        @SiteSectionLink("index", "home", "home")
+        @SiteSectionLink("index", "about", "about")
+        @SiteSectionLink("index", "portfolio", "portfolio")
+        @SiteSectionLink("index", "blog", "blog", new { date = (DateTime?)null, postID = (int?)null })
+        @SiteSectionLink("index", "contact", "contact")
+      </ul>
+    </nav>
+  </header>
+  <div>
+    @RenderBody()
+  </div>
+</body>
+</html>

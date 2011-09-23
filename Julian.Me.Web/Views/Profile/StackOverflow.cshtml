@@ -1,0 +1,48 @@
+﻿<div class="profile-widget stackoverflow">
+  <div class="stackoverflow-slider">
+    <div class="stackoverflow-main">
+      <img class="logo" src="@Url.Content("~/content/images/so.png")" />
+      <span class="stackoverflow-reputation">2957</span>
+    </div>
+    <div style="float: right;" class="stackoverflow-profile">
+      <p>
+        Bla bla lorem ipsum bla bla</p>
+    </div>
+    <div class="stackoverflow-text">
+    </div>
+    <div class="stackoverflow-dynamic">
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+  $(function () {
+
+    var minLeft = -300;
+    var curLeft = 0;
+    var stepSize = 300;
+
+    setInterval(function () {
+
+      var slider = $('div.stackoverflow-slider');
+
+      slider.setTransition({
+        property: 'left',
+        'timing-function': 'ease-out',
+        duration: '0.3s, 0.3s'
+      });
+
+      curLeft -= stepSize;
+
+      if (curLeft < minLeft) {
+        curLeft = 0;
+      }
+
+      slider.css('left', curLeft + 'px');
+    }, 2000);
+
+
+
+  });
+
+</script>

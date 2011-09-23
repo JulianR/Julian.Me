@@ -1,0 +1,55 @@
+﻿@model Julian.Me.Web.Models.MessageModel
+@{
+  ViewBag.Title = "Index";
+}
+@Html.ValidationSummary()
+<div class="sections">
+  <section title="Contact">
+  <p>
+    You can always mail me at <a href="mailto:me@@julian.me">me@@julian.me</a> or <a
+      href="mailto:julian.rooze@@gmail.com">julian.rooze@@gmail.com</a> or use the below
+    form.
+  </p>
+  <form id="contact-form" action="@Url.Action("Send", "Contact")">
+  <ul>
+    <li>
+      <label for="contact-name">
+        Your name</label>
+      <input type="text" id="contact-name" name="name" required="" placeholder="name" value="@Model.Name" />
+    </li>
+    <li>
+      <label for="contact-email">
+        Your email address</label>
+      <input type="email" id="contact-email" name="email" required="" placeholder="email" value="@Model.Email" />
+    </li>
+    <li>
+      <label for="contact-message">
+        And your message</label>
+      <textarea rows="10" id="contact-message" name="message" required="">@Model.Message</textarea>
+    </li>
+  </ul>
+  <input type="submit" value="Send"/>
+  </form>
+</section>
+  <section title="Profiles">
+  <p>You can find me active on the following sites:</p>
+<p>
+  Stack Overflow: <a href="http://stackoverflow.com/users/61632/julianr">JulianR @@
+    StackOverflow</a>
+  <div id="contact-stackoverflow">
+    <a href="http://stackoverflow.com/users/61632/julianr">
+    <img src="http://stackoverflow.com/users/flair/61632.png?theme=clean" width="208" height="58" alt="profile for JulianR at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for JulianR at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+    </a>
+  </div>
+</p>
+<p>GitHub: <a href="https://github.com/JulianR/">JulianR @@ GitHub.com</a></p>
+
+@{
+  Html.RenderAction("StackOverflow", "Profile");
+}
+
+</section>
+</div>
+<script type="text/javascript">
+  $('div.sections').createTabs();
+</script>

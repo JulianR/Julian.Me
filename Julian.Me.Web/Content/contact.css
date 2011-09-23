@@ -1,0 +1,39 @@
+﻿body.contact
+{
+  background-color: #487D41;
+  color: White;
+}
+
+body.contact #main-navigation h1
+{
+  color: White;
+}
+
+
+body.contact input[type="submit"]
+{
+  width: 100px !important;
+  border: 2px solid white;
+  padding: 5px;
+  background-color: #5EA355;
+  color: White;
+}
+
+div#error-notification
+{
+  background-color: #5EA355;
+  border-bottom: 2px solid white;
+  display: none;
+}
+
+div.validation-summary-errors
+{
+  background-color: #5EA355;
+  border: 2px solid white;
+  padding: 20px;
+}
+
+div#contact-stackoverflow img
+{
+  border: 2px solid #5EA355;
+}

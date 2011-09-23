@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Julian.Me.Core", "Julian.Me.Core\Julian.Me.Core.csproj", "{DC8A68F6-A27D-41C8-B788-9B1393AEB55B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{09F0B118-161D-4BAE-B45D-2E90987F2E15}"
+	ProjectSection(SolutionItems) = preProject
+		Julian.Me.vsmdi = Julian.Me.vsmdi
+		Local.testsettings = Local.testsettings
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Julian.Me.Web", "Julian.Me.Web\Julian.Me.Web.csproj", "{31F1248C-1593-4DA9-86BF-4887CC54B5FA}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Julian.Me.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC8A68F6-A27D-41C8-B788-9B1393AEB55B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC8A68F6-A27D-41C8-B788-9B1393AEB55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC8A68F6-A27D-41C8-B788-9B1393AEB55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC8A68F6-A27D-41C8-B788-9B1393AEB55B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31F1248C-1593-4DA9-86BF-4887CC54B5FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31F1248C-1593-4DA9-86BF-4887CC54B5FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31F1248C-1593-4DA9-86BF-4887CC54B5FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31F1248C-1593-4DA9-86BF-4887CC54B5FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

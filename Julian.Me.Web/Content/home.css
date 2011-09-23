@@ -1,0 +1,10 @@
+﻿body.home
+{
+  background-color: #FFFFFF;
+  color: #222;
+}
+
+body.home #main-navigation h1
+{
+  color: #999;
+}

@@ -1,0 +1,17 @@
+﻿
+
+body.about
+{
+  background-color: #B52A00;
+  color: White;
+}
+
+body.about #main-navigation h1
+{
+  color: White;
+}
+
+div.about-sections
+{
+    width: 70%;
+}
