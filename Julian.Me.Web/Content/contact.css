@@ -12,7 +12,7 @@ body.contact #main-navigation h1
 
 body.contact input[type="submit"]
 {
-  width: 100px !important;
+  width: 7em !important;
   border: 2px solid white;
   padding: 5px;
   background-color: #5EA355;
@@ -30,7 +30,7 @@ div.validation-summary-errors
 {
   background-color: #5EA355;
   border: 2px solid white;
-  padding: 20px;
+  padding: 1.3em;
 }
 
 div#contact-stackoverflow img

@@ -1,17 +1,27 @@
-﻿var __bind = function (fn, me) { return function () { return fn.apply(me, arguments); }; };
+﻿var getDelay = function () {
+
+    // CSS3 animation detection - https://github.com/benbarnett/jQuery-Animate-Enhanced/blob/master/scripts/src/jquery.animate-enhanced.js
+    var style = (document.body || document.documentElement).style;
+
+    var supported = typeof style.WebkitTransition !== "undefined"
+        || typeof style.MozTransition !== "undefined"
+        || typeof style.OTransition !== "undefined";
+
+    return supported ? 200 : 0;
+
+};
+
 $.fn.createTabs = function () {
-    var $div, $ul, first, sections, tabId;
-    $div = this;
+    var $div = this;
     $div.addClass('tab-container');
-    sections = this.children('section');
+    var sections = this.children('section');
     $div.before('<ul class="tab-header"></ul>');
-    $ul = $('ul.tab-header').first();
-    tabId = 1;
-    first = true;
+    var $ul = $('ul.tab-header').first();
+    var tabId = 1;
+    var first = true;
     sections.each(function () {
-        var $section, title;
-        $section = $(this);
-        title = $section.attr('title');
+        var $section = $(this);
+        var title = $section.attr('title');
         $ul.append("<li><h2><a id=\"tab-header-" + tabId + "\" href=\"#\">" + title + "</a></h2></li>");
         $section.attr('id', 'tab-' + tabId);
         if (first) {
@@ -21,43 +31,77 @@ $.fn.createTabs = function () {
         return tabId++;
     });
     first = true;
-    return $ul.find('a').each(function () {
-        var $a;
-        $a = $(this);
+
+    $ul.find('a').each(function () {
+        var $a = $(this);
+
         if (first) {
             first = false;
             $a.addClass('active-tab-header');
         }
+
         return $a.click(function () {
-            var $section, $this;
             $('.active-tab').removeClass('active-tab');
             $('.active-tab-header').removeClass('active-tab-header');
-            $this = $(this);
+            var $this = $(this);
             $this.addClass('active-tab-header');
-            $section = $('#' + this.id.replace('tab-header', 'tab'));
+            var $section = $('#' + this.id.replace('tab-header', 'tab'));
             $section.addClass('active-tab');
+
+            $section.slideItemsIn();
+
             return false;
         });
     });
+
+    return this;
 };
-$.fn.slideItemsIn = function () {
-    var delay;
-    delay = 0;
-    setTimeout(__bind(function () {
-        var children;
-        children = this.find('*');
-        children.each(function () {
-            var child;
-            child = $(this);
-            child.setTransition({
-                property: 'opacity, left',
-                'timing-function': 'ease-in',
-                duration: '0.3s, 0.3s',
-                delay: delay + 'ms'
+
+$.fn.slideItemsIn = (function () {
+
+    var style = (document.body || document.documentElement).style;
+
+    var hasWebkitTransforms = typeof style.WebkitTransition !== "undefined"
+    || typeof style.MozTransition !== "undefined";
+
+    return function () {
+        var delay = 0;
+        var self = this;
+
+        setTimeout(function () {
+
+            var children = self.find('*');
+
+            children.each(function () {
+
+                var child = $(this);
+
+                if (hasWebkitTransforms === false) {
+
+                    setTimeout(function () {
+                        child.animate({
+                            opacity: 1,
+                            left: '0%'
+                        }, 300);
+                    }, delay);
+
+                    delay += 70;
+                } else { // Chrome's animation was choppy with jQuery's CSS animation plugin, works fine with the below way
+
+                    child.setTransition({
+                        property: 'opacity, left',
+                        'timing-function': 'ease-in',
+                        duration: '0.3s',
+                        delay: delay + 'ms'
+                    });
+
+                    child.css('opacity', 1);
+                    child.css('left', '0%');
+                    delay += 70;
+                }
+
+
             });
-            child.css('opacity', 1);
-            child.css('left', '0%');
-            delay += 90;
-        });
-    }, this), 0);
-};
+        }, 0);
+    }
+})();

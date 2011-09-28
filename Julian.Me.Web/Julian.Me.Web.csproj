@@ -108,6 +108,7 @@
     <Content Include="Scripts\jquery-1.6.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.1.js" />
     <Content Include="Scripts\jquery-1.6.1.min.js" />
+    <Content Include="Scripts\jquery.animate-enhanced.min.js" />
     <Content Include="Scripts\Scripts.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

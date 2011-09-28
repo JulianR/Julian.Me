@@ -11,7 +11,7 @@
   padding: 0;
   margin: 0;
   display: block;
-  padding-top: 10px;
+  padding-top: 0.6em;
 }
 
 #blog-navigation li
@@ -27,7 +27,7 @@
 #blog-navigation h2
 {
   display: inline;
-  padding-right: 30px;
+  padding-right: 1.6em;
 }
 
 #block-navigation a
@@ -39,7 +39,7 @@
 #blog-navigation h3
 {
   display: inline;
-  padding-right: 10px;
+  padding-right: 0.6em;
 }
 
 
@@ -60,7 +60,7 @@ div.blog-post-content > *
 div.blog-post-content h2
 {
   margin: 0;
-  margin-top: 20px;
+  margin-top: 1em;
 }
 
 p.blog-post-date
@@ -72,7 +72,7 @@ p.blog-post-date
 
 body.blog
 {
-  background-color: #268FCC; /* 30B3FF */
+  background-color: #1C6DAD; /* 30B3FF */
   color: White;
 }
 

@@ -2,22 +2,52 @@
     ViewBag.Title = "Index";
 }
 <div class="about-sections">
-    <section title="me">
+    <section title="me" class="slideable">
         <p>
-            I'm Julian Rooze and I'm a software developer living in the Netherlands. Being a
-            software developer, I write software for a living but as I suffer from the affliction
-            of actually <em>liking</em> software development, I do it as a hobby as well.
+            I'm Julian Rooze, a 24-year old software developer from the Netherlands. I write
+            software for a living, but I do it for fun as well since I actually like doing this
+            sort of thing.
+        </p>
+        <p>
+            My environment of choice is the .NET ecosystem, with C# as the language, which has
+            always served me well, but I am of course open to anything that looks interesting
+            or promising. I can't honestly say I've kept up with this, but the goal of learning
+            a new language every year is a commendable one. One of my short term goals though
+            is to properly dive into F#, as the whole functional paradigm is pretty fascinating
+            to me. My programming style in C# has definitely taken a turn to a more functional
+            style already.
+        </p>
+    </section>
+    <section title="education" class="slideable">
+        <p>
+            After graduating from high school in 2004 I took two years of a bachelor's degree
+            in Information Engineering before realizing I would like to learn more about the
+            technical side of software and less about the business side (Information Engineering
+            is sort of in between) so that's what I did and started over on a bachelor's degree
+            in Computer Science at Hogeschool van Amsterdam.
+        </p>
+        <p>
+            That was a much closer match to what I found interesting and I especially had fun
+            with anything that involved software development.
         </p>
         <p>
         </p>
     </section>
-    <section title="education">
+    <section title="work" class="slideable">
+        <p>
+            Aside from summertime and weekend jobs from age 15 and onward, I started working
+            at Diract-IT in the summer of 2008 as my first internship. During
+            that five month period, I had my first experience with .NET and C# and did many
+            small and large projects. After that, I stuck around and have been there ever since,
+            thanks to its informal atmosphere, progressive stance towards software development
+            and use of cutting edge technology.
+        </p>
     </section>
-    <section title="work">
-    </section>
-    <section title="hobbies">
+    <section title="hobbies" class="slideable">
     </section>
 </div>
 <script type="text/javascript">
-    $('div.about-sections').createTabs();
+    $(function () {
+        $('div.about-sections').createTabs().children().first().slideItemsIn();
+    });
 </script>

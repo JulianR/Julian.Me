@@ -26,6 +26,8 @@
   <script type="text/javascript" src="@Url.Content("~/Scripts/CSSAnimation.js")"></script>
   <script type="text/javascript" src="@Url.Content("~/Scripts/CSSAnimation.jQuery.js")"></script>
   <script type="text/javascript" src="@Url.Content("~/Scripts/Scripts.js")"></script>
+  <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.animate-enhanced.min.js")"></script>
+  
   @if (previousClass != newClass)
   {
     <script type="text/javascript">
@@ -44,7 +46,7 @@
 
           $body.removeClass('@previousClass');
           $body.addClass('@newClass');
-        }, 100);
+        }, getDelay());
 
       });
 
