@@ -57,12 +57,20 @@ $.fn.createTabs = function () {
     return this;
 };
 
-$.fn.slideItemsIn = (function () {
+var supportsCssTransitions = function () {
 
     var style = (document.body || document.documentElement).style;
 
-    var hasWebkitTransforms = typeof style.WebkitTransition !== "undefined"
+    var hasTransforms = typeof style.WebkitTransition !== "undefined"
     || typeof style.MozTransition !== "undefined";
+
+    return hasTransforms;
+
+};
+
+$.fn.slideItemsIn = (function () {
+
+    var hasTransforms = supportsCssTransitions();
 
     return function () {
         var delay = 0;
@@ -76,7 +84,7 @@ $.fn.slideItemsIn = (function () {
 
                 var child = $(this);
 
-                if (hasWebkitTransforms === false) {
+                if (hasTransforms === false) {
 
                     setTimeout(function () {
                         child.animate({
@@ -105,3 +113,40 @@ $.fn.slideItemsIn = (function () {
         }, 0);
     }
 })();
+
+
+var slidePortfolio = function (dir) {
+
+    var left;
+
+    if (dir === 'in') {
+        left = '0%';
+    } else {
+        left = '-100%';
+    }
+
+    if (supportsCssTransitions()) {
+        var body = $('body');
+
+        setTimeout(function () {
+            body.css('position', 'relative');
+
+            body.setTransition({
+                property: 'left',
+                'timing-function': 'ease-in',
+                duration: '0.3s'
+            });
+
+            body.css('left', left);
+        }, 0);
+
+    } else {
+        setTimeout(function () {
+            var body = $('body');
+            body.css('position', 'relative');
+            $('body').animate({
+                left: left
+            });
+        }, 0);
+    }
+};

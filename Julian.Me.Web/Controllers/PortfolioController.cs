@@ -12,8 +12,10 @@ namespace Julian.Me.Web.Controllers
     //
     // GET: /Portfolio/
 
-    public ActionResult Index()
+    public ActionResult Index(string project)
     {
+      ViewBag.Project = project;
+
       return View();
     }
 

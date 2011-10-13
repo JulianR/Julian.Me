@@ -1,10 +1,97 @@
 ﻿body.portfolio
 {
-  background-color: #444;
-  color: White;
+    background-color: #444;
+    color: White;
 }
 
 body.portfolio #main-navigation h1
 {
-  color: White;
+    color: White;
+}
+
+div#portfolio-slide-container
+{
+    position: absolute;
+    left: 100%;
+    top: 0%;
+    width: 100%; /*height: 100%;*/
+    padding: 0;
+    margin: 0;
+    background-color: #AF8962;
+}
+
+div#portfolio-slide-container h3
+{
+    text-transform: uppercase;
+    font-family: segoeui;
+    font-size: 0.9em;
+}
+
+div#portfolio-slide-padding
+{
+    padding: 20px;
+}
+
+ul#features li
+{
+    margin-bottom: 2em;
+}
+ul#features strong
+{
+    font-weight: bold;
+}
+
+ul#features em
+{
+    font-style: italic;
+}
+
+table#portfolio-projects
+{
+}
+
+table#portfolio-projects tr
+{
+}
+
+table#portfolio-projects div
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+div#thismember-tile
+{
+    background-color: #1C6DAD;
+    width: 304px;
+    height: 150px;
+}
+
+div#paginggrid-tile
+{
+    background-color: #1C6DAD;
+    width: 150px;
+    height: 150px;
+}
+
+div#raytracer-tile
+{
+    background-color: #1C6DAD;
+    width: 150px;
+    height: 150px;
+}
+
+div#slimeolution-tile
+{
+    background-color: #FF6DAD;
+    width: 150px;
+    height: 150px;
+}
+
+a.tile
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
 }

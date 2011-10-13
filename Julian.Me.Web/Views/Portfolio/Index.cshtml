@@ -1,4 +1,74 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+<link href="@Url.Content("~/Content/shCore.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/shThemeDefault.css")" rel="stylesheet" type="text/css" />
 
+<div id="portfolio-slide-container">
+    <div id="portfolio-slide-padding">
+        <a href="#" id="back-arrow"></a>
+        @if (ViewBag.Project != null)
+        {
+            Html.RenderPartial((string)ViewBag.Project);
+        }
+    </div>
+</div>
+<table id="portfolio-projects">
+    <tr>
+        <td colspan="2">
+            <div id="thismember-tile">
+                <a href="@Url.Action("Index", new { project = "thismember" })" class="tile" />ThisMember
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div id="raytracer-tile">
+                RayTracer
+            </div>
+        </td>
+        <td>
+            <div id="paginggrid-tile">
+                MvcPagingGrid
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <div id="slimeolution-tile" style="width: 304px;">
+                Slime-O-Lution
+            </div>
+        </td>
+    </tr>
+</table>
+<script type="text/javascript">
+    $(function () {
+
+        $('body').css('overflow-x', 'hidden');
+
+        $('a#back-arrow').click(function () {
+
+            slidePortfolio('in');
+
+            return false;
+
+        });
+
+        @if (ViewBag.Project != null)
+        {
+        <text>
+        setTimeout(function () {
+            slidePortfolio('out');
+        }, 0);
+        </text>
+        }   
+
+    });
+</script>
+<script src="@Url.Content("~/Scripts/shCore.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/shBrushCSharp.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        SyntaxHighlighter.all();
+    });
+</script>

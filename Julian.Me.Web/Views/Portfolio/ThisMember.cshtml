@@ -1,0 +1,127 @@
+﻿<div class="about-sections">
+    <section title="overview">
+        <p>
+            ThisMember is a .NET 4 library that can perform mappings between similar - but different
+            - classes based on convention as well as user-defined mappings. This is useful in
+            multi-tier applications where objects are passed through various layers and where
+            they are transformed into other objects. For example, a database model that is transformed
+            into a view model. Something you'd otherwise have to write out by hand which is
+            tedious and error-prone.
+        </p>
+        <p>
+            ThisMember has been designed so that it's both easy to use as well as blazingly
+            fast so you never have to feel guilty about performing all those mappings. In the
+            best case scenario, there is exactly zero overhead compared to writing out the mapping
+            manually. But even the normal case that is the easiest to use has very little overhead
+            as well.
+        </p>
+        <h3>
+            Verifiable
+        </h3>
+        <p>
+            Doing the transformations manually by writing out the mappings manually is not only
+            tedious, it's also easy to forget something and more work to maintain by hand.</p>
+        <p>
+            ThisMember by default gets out of your way and doesn't complain too much about properties
+            not getting mapped, unless you want it to. If configured like that, it will throw
+            an exception detailing the members on the destination object that do not get receive
+            a value from the source object, allowing you to test your mappings in a unit test.</p>
+        <h3>
+            Features</h3>
+        <ul id="features">
+            <li><strong>Easy to use.</strong> The API has been kept accessible and ThisMember gets
+                out of your way as much as possible by not forcing you to do anything, such as defining
+                all your mappings explicitly.</li>
+            <li><strong>Fast.</strong> Creating a map involves a relatively costly compilation phase,
+                but after that the mappings are generally as fast as if you had written them manually.
+                To achieve this, ThisMember generates optimal code for the maps, with configurable
+                levels of safety checks.</li>
+            <li><strong>Deep cloning.</strong> ThisMember can perform deep clones of objects, with
+                a configurable and optional depth limit. Things like recursive relationships are
+                handled safely and will not cause a StackOverflowException, but they do not get
+                mapped yet in situations where it is theoretically possible to do this safely.
+            </li>
+            <li><strong>Projections.</strong> Rather than performing the actual mapping of an in-memory
+                object, ThisMember can also generate a description of <em>how</em> to map two types,
+                in the shape of an Expression. This Expression can then be used by anything that
+                accepts it as an argument, for example LINQ-to-Entities or LINQ-to-SQL. Essentially
+                allowing you to do mappings in your database before the results even get returned
+                to you, rather than in-memory.</li>
+            <li><strong>Map repository.</strong> A central storage location for custom map configurations
+                is offered in the form of a map repository (the "MapRepositoryBase" base class)
+                so everything is defined only once in a single location.</li>
+            <li><strong>Testable.</strong> By default, ThisMember is permissive and allows properties
+                to not be mapped. If configured to, however, it can throw an exception when a mapping
+                is not complete. That allows you to make sure you didn't forget to add, remove or
+                rename a property on both sides of a mapping.</li>
+            <li><strong>Parameters.</strong> If your mapping requires a variable that can be different
+                with every mapping call, you can pass in parameters to your maps.</li>
+        </ul>
+    </section>
+    <section title="code samples">
+        <h3>
+            basic mapping</h3>
+        <p>
+            A map between two objects is created implicitly following conventions and configurations,
+            if no map was explicitly defined yet.
+        </p>
+        <p>
+            Those conventions are quite simple really: the match is done by name, by default
+            case-insensitive. If a mapping can be made or not between two properties or fields
+            of the same name is a little more complicated however and ThisMember will try to
+            do its best to perform any necessary conversions. For example the conversion between
+            an enum type and an integer, or between a nullable value type and a non-nullable
+            value type.
+        </p>
+        <script type="syntaxhighlighter" class="brush: csharp; gutter: false; tab-size: 2; toolbar: false"><![CDATA[
+
+        // Generally you would reuse this instance and keep it around somewhere. You don't 
+        // create a new one for every mapping.
+        var mapper = new MemberMapper(); 
+
+        var model = mapper.Map<Customer, EditCustomerModel>(customer);
+
+        ]]>
+        </script>
+        <h3>
+            custom mappings</h3>
+        <p>
+            Conventions only go so far, however. You want to be able to control any mappings
+            that do not match up to the conventions and define them once, centrally. For example,
+            your view model might contain a "FullName" property whereas the data model only
+            has a "FirstName" and a "LastName". In ThisMember, it works like this:
+        </p>
+        <script type="syntaxhighlighter" class="brush: csharp; gutter: false; tab-size: 2; toolbar: false"><![CDATA[
+
+        // Generally you would reuse this instance and keep it around somewhere. You don't 
+        // create a new one for every mapping.
+        var mapper = new MemberMapper(); 
+
+        mapper.CreateMap<Customer, EditCustomerModel>(source => new CustomerDto
+        {
+          FullName = source.FirstName + " " + source.LastName
+        });
+
+        // Passing in a destination object instance is faster because if ThisMember needs to do this 
+        // it will involve reflection because of how .NET handles the new() constraint
+        mapper.Map(customer, new EditCustomerModel());
+
+        ]]>
+        </script>
+        <p>
+            You only need to include the properties that require custom mapping. The properties
+            that can be matched by convention are not needed here.</p>
+        <p>
+            The custom mappings can be almost of any complexity. In fact, it's valid to access
+            a local variable in a custom mapping, but almost certainly a bad idea. If you find
+            yourself needing that, you might want to look in "CreateMap" and "Map" overloads
+            that accept a parameter. It's also valid to call any methods in the mapping, but
+            whether it's advisable to call non-static methods is questionable.
+        </p>
+    </section>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('div.about-sections').createTabs();
+    });
+</script>

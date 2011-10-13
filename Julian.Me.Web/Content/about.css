@@ -2,13 +2,13 @@
 
 body.about
 {
-  background-color: Black;/*#B52A00;*/
-  color: White;
+  background-color: #111;/*#B52A00;*/
+  color: #EEE;
 }
 
 body.about #main-navigation h1
 {
-  color: White;
+  color: #EEE;
 }
 
 div.about-sections

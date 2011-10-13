@@ -97,9 +97,12 @@
     <Content Include="Content\blog.css" />
     <Content Include="Content\home.css" />
     <Content Include="Content\about.css" />
+    <Content Include="Content\images\back-arrow.png" />
     <Content Include="Content\images\so.png" />
     <Content Include="Content\portfolio.css" />
     <Content Include="Content\contact.css" />
+    <Content Include="Content\shCore.css" />
+    <Content Include="Content\shThemeDefault.css" />
     <Content Include="Content\site.css" />
     <Content Include="Content\stackoverflow.css" />
     <Content Include="Global.asax" />
@@ -110,6 +113,8 @@
     <Content Include="Scripts\jquery-1.6.1.min.js" />
     <Content Include="Scripts\jquery.animate-enhanced.min.js" />
     <Content Include="Scripts\Scripts.js" />
+    <Content Include="Scripts\shBrushCSharp.js" />
+    <Content Include="Scripts\shCore.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -146,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Blog\Index.cshtml" />
@@ -175,6 +181,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Profile\StackOverflow.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Portfolio\ThisMember.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\images\yellow-circle.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

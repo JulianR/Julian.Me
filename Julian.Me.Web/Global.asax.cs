@@ -24,6 +24,12 @@ namespace Julian.Me.Web
       routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
       routes.MapRoute(
+         "PortfolioProject",
+         "portfolio/{project}",
+         new { controller = "portfolio", action = "index", project = UrlParameter.Optional }
+      );
+
+      routes.MapRoute(
          "BlogMonthPostID",
          "blog/{date}/{postID}",
          new { controller = "blog", action = "index" }

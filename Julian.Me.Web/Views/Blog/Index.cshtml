@@ -50,6 +50,11 @@
   @RenderYears()
   @RenderMonths()
 </nav>
+
+@if (Julian.Me.Web.Security.Client.User != null && Julian.Me.Web.Security.Client.User.IsAdmin)
+{ 
+}
+
 <div class="blog-posts">
   @foreach (var post in Model.Posts)
   {
