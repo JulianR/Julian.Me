@@ -8,16 +8,21 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using Julian.Me.Web.Models;
-using Julian.Me.Web.Security;
 using Julian.Me.Core.Security;
 
 namespace Julian.Me.Web.Controllers
 {
+  [JulianMe]
   public class AdminController : Controller
   {
     public ActionResult Login()
     {
       return View();
+    }
+
+    public ActionResult Index()
+    {
+      return RedirectToAction("Login");
     }
 
     [HttpPost]

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Julian.Me.Web.Models;
+using Julian.Me.Core.Security;
 
 namespace Julian.Me.Web.Controllers
 {
@@ -12,8 +13,6 @@ namespace Julian.Me.Web.Controllers
   {
     public ActionResult Index()
     {
-      ViewBag.Message = "Welcome to ASP.NET MVC!";
-
       return View();
     }
 

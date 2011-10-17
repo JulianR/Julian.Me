@@ -7,7 +7,7 @@ using Julian.Me.Core.Data;
 using Julian.Me.Core.Models;
 using Julian.Me.Core.Security;
 
-namespace Julian.Me.Web.Security
+namespace Julian.Me.Core.Security
 {
   public class ClientIdentity : IIdentity
   {

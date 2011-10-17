@@ -1,0 +1,41 @@
+﻿<div id="thismember-tile-container">
+    <div id="thismember-tile-description">
+        <p>
+            a fast and easy object to object mapper</p>
+    </div>
+    <div id="thismember-tile-title">
+        <span>ThisMember</span></div>
+    <div id="thismember-tile-slider">
+        <img id="thismember-tile-slider-img" src="@Url.Content("~/Content/images/thismember-code.png")" /></div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var current = 1;
+
+        var animateCodeSlider = function () {
+            if (current < 0) {
+                current = 0;
+            } else {
+                current = -1;
+            }
+
+            $('div#thismember-tile-slider img').setTransition({
+                property: 'left',
+                'timing-function': 'ease-out',
+                duration: '5.0s'
+            });
+
+            $('div#thismember-tile-slider img').css('left', current * 385 + 'px');
+        };
+
+        setTimeout(animateCodeSlider, 2000);
+
+        setInterval(animateCodeSlider, 10000);
+
+
+
+        //            $('div#thismember-tile-slider img').animate({
+        //                left: (current * 200) + 'px'
+        //            }, 2000);
+    });
+</script>

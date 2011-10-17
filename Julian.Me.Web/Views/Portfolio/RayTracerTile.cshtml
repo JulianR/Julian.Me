@@ -1,0 +1,33 @@
+﻿<div id="raytracer-tile-container">
+    <div id="raytracer-tile-top">
+        <img src="@Url.Content("~/Content/images/raytracer-bg.png")" />
+    </div>
+    <div id="raytracer-tile-bottom">
+        <span id="raytracer-tile-title">RayTracer</h2>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        var current = 1;
+
+        var animateImgSlider = function () {
+            if (current < 0) {
+                current = 0;
+            } else {
+                current = -1;
+            }
+
+            $('div#raytracer-tile-top img').setTransition({
+                property: 'top',
+                'timing-function': 'ease-out',
+                duration: '1.0s'
+            });
+
+            $('div#raytracer-tile-top img').css('top', current * 94 + 'px');
+        };
+
+        setTimeout(animateImgSlider, 2000);
+
+        setInterval(animateImgSlider, 5000);
+    });
+</script>

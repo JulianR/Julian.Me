@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Julian.Me.Web.Security;
 using Julian.Me.Core.Security;
 using Julian.Me.Core.Data;
 using Julian.Me.Core.Models;
@@ -32,14 +31,17 @@ namespace Julian.Me.Web
       routes.MapRoute(
          "BlogMonthPostID",
          "blog/{date}/{postID}",
-         new { controller = "blog", action = "index" }
+         new { controller = "blog", action = "index" },
+         new { date = new BlogRouteConstraint() }
       );
 
       routes.MapRoute(
         "Blog",
         "blog/{date}",
-        new { controller = "blog", action = "index", date = UrlParameter.Optional }
+        new { controller = "blog", action = "index", date = UrlParameter.Optional },
+        new { date = new BlogRouteConstraint() }
      );
+
 
       routes.MapRoute(
         "Default", // Route name
@@ -48,9 +50,26 @@ namespace Julian.Me.Web
       );
     }
 
+    private class BlogRouteConstraint : IRouteConstraint
+    {
+
+      public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+      {
+        var dateVal = values["date"] as string;
+
+        if (dateVal != null)
+        {
+          var dateValLower = dateVal.ToLowerInvariant();
+          return dateValLower != "edit" && dateValLower != "new";
+        }
+
+        return true;
+      }
+    }
+
     public override void Init()
     {
-      //this.PostAcquireRequestState += MvcApplication_PostAcquireRequestState;
+      this.PostAcquireRequestState += MvcApplication_PostAcquireRequestState;
       base.Init();
     }
 
@@ -62,7 +81,7 @@ namespace Julian.Me.Web
       RegisterGlobalFilters(GlobalFilters.Filters);
       RegisterRoutes(RouteTable.Routes);
 
-      Database.SetInitializer(new DbInitializer());
+      //Database.SetInitializer(new DbInitializer());
 
     }
 
@@ -73,33 +92,39 @@ namespace Julian.Me.Web
         return;
       }
 
-      if (Request.IsAuthenticated)
+      if (HttpContext.Current.Handler is System.Web.SessionState.IRequiresSessionState
+  || HttpContext.Current.Handler is System.Web.SessionState.IReadOnlySessionState)
       {
-        var username = HttpContext.Current.User.Identity.Name;
 
-        var sessionPrincipal = Session["Principal"] as ClientPrincipal;
-
-        if (sessionPrincipal == null)
+        if (Request.IsAuthenticated)
         {
-          var identity = new ClientIdentity(username, null, UserAuthenticationMode.Username);
+          var username = HttpContext.Current.User.Identity.Name;
 
-          sessionPrincipal = new ClientPrincipal(identity);
+          var sessionPrincipal = Session["Principal"] as ClientPrincipal;
 
-          Session["Principal"] = sessionPrincipal;
+          if (sessionPrincipal == null)
+          {
+            var identity = new ClientIdentity(username, null, UserAuthenticationMode.Username);
+
+            sessionPrincipal = new ClientPrincipal(identity);
+
+            Session["Principal"] = sessionPrincipal;
+          }
+
+          HttpContext.Current.User = sessionPrincipal;
         }
+        else
+        {
+          Session["Principal"] = null;
+        }
+      }
 
-        HttpContext.Current.User = sessionPrincipal;
-      }
-      else
-      {
-        Session["Principal"] = null;
-      }
     }
   }
 
 
 
-  public class DbInitializer : System.Data.Entity.CreateDatabaseIfNotExists<DbDataContext>
+  public class DbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<DbDataContext>
   {
 
     private static string[] _lipsum = new[]
@@ -165,7 +190,6 @@ namespace Julian.Me.Web
         var creationTime = new DateTime(random.Next(2010, 2012), random.Next(1, 13), random.Next(1, 29));
         var post = new BlogPost
         {
-          CreatedBy = user,
           CreationTime = creationTime,
           Title = "Title " + i,
           Content = string.Join("", from x in Enumerable.Range(1, random.Next(1, 5))

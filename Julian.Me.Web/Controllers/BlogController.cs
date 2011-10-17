@@ -5,35 +5,79 @@ using System.Web;
 using System.Web.Mvc;
 using Julian.Me.Web.Models;
 using Julian.Me.Core.Data;
+using Julian.Me.Core.Models;
 
 namespace Julian.Me.Web.Controllers
 {
   [JulianMeAttribute]
   public class BlogController : Controller
   {
-    //
-    // GET: /Blog/
-
-    public ActionResult Post()
-    {
-
-      var model = new BlogPostModel
-      {
-        Title = "Title",
-        Body = "<p> Pellentesque velit ante, vulputate nec lacinia at, ultricies et elit. Maecenas est nibh, ornare sed varius bibendum, aliquam id diam. </p><p>Pellentesque blandit sagittis odio eu dignissim. Nunc vel augue ac sapien consequat imperdiet. Ut id purus justo, id lacinia magna. Maecenas dolor quam, sodales quis mattis ut, porta nec velit.</p><p> Sed euismod aliquet nisi, sit amet mattis turpis vulputate vitae. Praesent vitae mi lectus, vel vulputate dolor. Nullam porta dapibus neque id mattis. In hac habitasse platea dictumst. Morbi eleifend lacus a purus viverra ultrices. Aenean nibh odio, fermentum eu auctor nec, mattis quis lectus. Suspendisse euismod eros vitae elit tempus ornare.</p>"
-      };
-
-      return PartialView(model);
-    }
-
     [HttpGet]
+    [JulianMe(RequiresAdmin = true)]
     public ActionResult Edit(int id)
     {
       using (var context = new DbDataContext())
       {
-        var post = context.BlogPosts.SingleOrDefault(b => b.ID == id);
+        var post = context.BlogPosts.Where(b => b.ID == id)
+          .Select(p => new BlogPostModel
+          {
+            ID = p.ID,
+            Body = p.Content,
+            Title = p.Title
+          }).SingleOrDefault();
 
         return View(post);
+
+      }
+    }
+
+    [HttpPost]
+    [JulianMe(RequiresAdmin = true)]
+    public ActionResult Edit(BlogPostModel model)
+    {
+      using (var context = new DbDataContext())
+      {
+        var post = context.BlogPosts.SingleOrDefault(p => p.ID == model.ID);
+
+        post.Content = model.Body;
+        post.LastModificationTime = DateTime.Now;
+        post.Title = model.Title;
+
+        context.SaveChanges();
+
+        return RedirectToAction("Index", "Blog");
+
+      }
+    }
+
+    [HttpGet]
+    [JulianMe(RequiresAdmin = true)]
+    public ActionResult New()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    [JulianMe(RequiresAdmin = true)]
+    public ActionResult New(BlogPostModel model)
+    {
+      using (var context = new DbDataContext())
+      {
+        var creationTime = DateTime.Now;
+        var post = new BlogPost
+        {
+          Content = model.Body,
+          Title = model.Title,
+          CreationTime = creationTime,
+          Month = creationTime.Month,
+          Year = creationTime.Year,
+        };
+
+        context.BlogPosts.Add(post);
+
+        context.SaveChanges();
+
+        return RedirectToAction("Index");
 
       }
     }
@@ -89,19 +133,20 @@ namespace Julian.Me.Web.Controllers
           {
             month = (from p in context.BlogPosts
                      where p.Year == year
-                     select p.Month).Max();
+                     select (int?)p.Month).Max() ?? 1;
           }
           else
           {
             month = (from p in context.BlogPosts
                      where p.Year == year
-                     select p.Month).Min();
+                     select (int?)p.Month).Min() ?? 1;
           }
         }
 
         var query = (from p in context.BlogPosts
                      where (postID.HasValue && p.ID == postID.Value) || (postID == null && p.Year == year
                      && p.Month == month.Value)
+                     orderby p.CreationTime descending
                      select p);
 
         var postsForMonth = (from p in query

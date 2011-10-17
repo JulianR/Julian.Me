@@ -57,16 +57,18 @@ $.fn.createTabs = function () {
     return this;
 };
 
-var supportsCssTransitions = function () {
+var supportsCssTransitions = (function () {
 
     var style = (document.body || document.documentElement).style;
 
     var hasTransforms = typeof style.WebkitTransition !== "undefined"
     || typeof style.MozTransition !== "undefined";
 
-    return hasTransforms;
+    return function () {
+        return hasTransforms;
+    };
 
-};
+})();
 
 $.fn.slideItemsIn = (function () {
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 
-namespace Julian.Me.Web.Security
+namespace Julian.Me.Core.Security
 {
   public static class Client
   {

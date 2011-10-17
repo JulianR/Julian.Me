@@ -18,13 +18,28 @@
 body
 {
     color: #222;
-    font-family: segoeuil, "Segoe UI", Helvetica, sans-serif;
+    font-family: segoeuil, "Segoe UI" , Helvetica, sans-serif;
     cursor: default;
     padding: 2em;
     margin: 0;
     font-weight: lighter;
     font-size: 13pt;
     line-height: 1.7em;
+}
+
+
+div#effect-layer
+{
+    left: 0;
+    top: 0;
+    position: fixed;
+    z-index: -1000;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0; /*background: -webkit-linear-gradient(left, #777, #444);*/
+    background-image: -moz-linear-gradient(left , #222 8%, #888 100%);
 }
 
 p
@@ -72,6 +87,12 @@ h3
 {
     font-size: 1.2em;
 }
+
+img
+{
+    border: 0;
+}
+
 
 header
 {
@@ -131,7 +152,7 @@ input, textarea
     font-family: segoeui;
 }
 
-#contact-form input, textarea
+#contact-form input, #contact-form textarea
 {
     width: 250px;
 }
@@ -228,9 +249,9 @@ div.profile-widget
 
 .slideable > *
 {
-  left: -20%;
-  opacity: 0;
-  position: relative;
+    left: -20%;
+    opacity: 0;
+    position: relative;
 }
 
 a#back-arrow
@@ -254,4 +275,10 @@ a#back-arrow
 a#back-arrow:hover
 {
     background-image: url(images/back-arrow.png);
+}
+
+body.admin
+{
+    background-color: #000;
+    color: White;
 }

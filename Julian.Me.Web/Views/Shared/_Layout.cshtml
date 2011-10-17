@@ -22,6 +22,8 @@
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/portfolio.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/home.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/stackoverflow.css")" />
+    <link href="@Url.Content("~/Content/shCore.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/shThemeDefault.css")" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.6.1.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/CSSAnimation.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/CSSAnimation.jQuery.js")"></script>
@@ -53,6 +55,8 @@
     }
 </head>
 <body class="@previousClass">
+    @*    <div id="effect-layer">
+    </div>*@
     @if (!string.IsNullOrEmpty(error))
     { 
         <div id="error-notification">

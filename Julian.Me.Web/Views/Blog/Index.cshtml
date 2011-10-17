@@ -1,74 +1,78 @@
 ﻿@model Julian.Me.Web.Models.BlogIndexModel
 @helper RenderYears()
-  {
-  <ul id="blog-years">
-    @foreach (var year in Model.Years)
     {
-      <li>
-        <h2>
-          @if (year == Model.CurrentYear)
-          { 
-            <a class="active" href="@Url.Action("index", "blog", new { date = year.ToString() })">@year</a>
-          }
-          else
-          {
-            <a href="@Url.Action("index", "blog", new { date = year.ToString() })">@year</a>
-          }
-          </h2>
-      </li>
-    }
-  </ul>
+    <ul id="blog-years">
+        @foreach (var year in Model.Years)
+        {
+            <li>
+                <h2>
+                    @if (year == Model.CurrentYear)
+                    { 
+                        <a class="active" href="@Url.Action("index", "blog", new { date = year.ToString() })">@year</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("index", "blog", new { date = year.ToString() })">@year</a>
+                    }
+                </h2>
+            </li>
+        }
+    </ul>
 }
 @helper RenderMonths()
-  {
-  <ul id="blog-months">
-    @{
-      var culture = Julian.Me.Web.CultureHelper.DateCulture;
-    }
-    @foreach (var month in Model.Months)
     {
-      <li>
-        <h3>
-        @if (month == Model.CurrentMonth)
-        { 
-          <a class="active" href="@Url.Action("index", "blog", new { date = month + "-" + Model.CurrentYear })">
-            @culture.DateTimeFormat.GetMonthName(month)
-          </a>
+    <ul id="blog-months">
+        @{
+            var culture = Julian.Me.Web.CultureHelper.DateCulture;
         }
-        else 
-        { 
-          <a href="@Url.Action("index", "blog", new { date = month + "-" + Model.CurrentYear })">
-            @culture.DateTimeFormat.GetMonthName(month)
-          </a>
+        @foreach (var month in Model.Months)
+        {
+            <li>
+                <h3>
+                    @if (month == Model.CurrentMonth)
+                    { 
+                        <a class="active" href="@Url.Action("index", "blog", new { date = month + "-" + Model.CurrentYear })">
+                            @culture.DateTimeFormat.GetMonthName(month)
+                        </a>
+                    }
+                    else
+                    { 
+                        <a href="@Url.Action("index", "blog", new { date = month + "-" + Model.CurrentYear })">
+                            @culture.DateTimeFormat.GetMonthName(month)
+                        </a>
+                    }
+                </h3>
+            </li>
         }
-        </h3>
-      </li>
-    }
-  </ul>
+    </ul>
 }
 <nav id="blog-navigation">
-  @RenderYears()
-  @RenderMonths()
+    @RenderYears()
+    @RenderMonths()
 </nav>
 
-@if (Julian.Me.Web.Security.Client.User != null && Julian.Me.Web.Security.Client.User.IsAdmin)
+@if (Julian.Me.Core.Security.Client.User != null && Julian.Me.Core.Security.Client.User.IsAdmin)
 { 
+    <a href="@Url.Action("New", "Blog")">new post</a>
 }
-
 <div class="blog-posts">
-  @foreach (var post in Model.Posts)
-  {
-    Html.RenderPartial("Post", post);
-  }
+    @foreach (var post in Model.Posts)
+    {
+        Html.RenderPartial("Post", post);
+    }
 </div>
 
+<script src="@Url.Content("~/Scripts/shCore.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/shBrushCSharp.js")" type="text/javascript"></script>
 <script type="text/javascript">
-  $(function () {
+    $(function () {
 
-    $('div.blog-posts').children().each(function () {
-      $(this).slideItemsIn();
+        $('div.blog-posts').children().each(function () {
+            $(this).slideItemsIn();
+        });
+
+        SyntaxHighlighter.all();
+
     });
-
-  });
 
 </script>

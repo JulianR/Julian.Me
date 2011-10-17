@@ -6,7 +6,7 @@ using Julian.Me.Core.Models.Base;
 
 namespace Julian.Me.Core.Models
 {
-  public class BlogPost : AuditedDataModel<BlogPost>
+  public class BlogPost : DataModel<BlogPost>
   {
     public string Title { get; set; }
 
@@ -17,5 +17,9 @@ namespace Julian.Me.Core.Models
     public int Month { get; set; }
 
     public ICollection<Tag> Tags { get; set; }
+
+    public DateTime CreationTime { get; set; }
+
+    public DateTime? LastModificationTime { get; set; }
   }
 }

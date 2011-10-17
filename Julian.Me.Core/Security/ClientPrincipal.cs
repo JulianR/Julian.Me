@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Security.Principal;
 
-namespace Julian.Me.Web.Security
+namespace Julian.Me.Core.Security
 {
   public class ClientPrincipal : IPrincipal
   {

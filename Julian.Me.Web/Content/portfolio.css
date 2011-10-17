@@ -1,8 +1,9 @@
 ﻿body.portfolio
 {
-    background-color: #444;
+    background-color: #000;
     color: White;
 }
+
 
 body.portfolio #main-navigation h1
 {
@@ -17,7 +18,7 @@ div#portfolio-slide-container
     width: 100%; /*height: 100%;*/
     padding: 0;
     margin: 0;
-    background-color: #AF8962;
+    background-color: #523E2A;
 }
 
 div#portfolio-slide-container h3
@@ -32,32 +33,37 @@ div#portfolio-slide-padding
     padding: 20px;
 }
 
-ul#features li
+ul.portfolio-list li
 {
     margin-bottom: 2em;
 }
-ul#features strong
+ul.portfolio-list strong
 {
     font-weight: bold;
 }
 
-ul#features em
+ul.portfolio-list em
 {
     font-style: italic;
 }
 
 table#portfolio-projects
 {
+    margin-top: 100px;
+    -webkit-perspective: 800;
+    -webkit-perspective-origin: 50% 50%;
 }
 
 table#portfolio-projects tr
 {
 }
 
-table#portfolio-projects div
+table#portfolio-projects div.tile
 {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: -webkit-transform 0.2s linear;
+    -webkit-transform-style: preserve-3d;
 }
 
 div#thismember-tile
@@ -65,6 +71,10 @@ div#thismember-tile
     background-color: #1C6DAD;
     width: 304px;
     height: 150px;
+}
+
+div#thismember-tile:hover
+{
 }
 
 div#paginggrid-tile
@@ -76,15 +86,15 @@ div#paginggrid-tile
 
 div#raytracer-tile
 {
-    background-color: #1C6DAD;
+    background-color: #C13232;
     width: 150px;
     height: 150px;
 }
 
 div#slimeolution-tile
 {
-    background-color: #FF6DAD;
-    width: 150px;
+    background-color: #0E6D38;
+    width: 304px;
     height: 150px;
 }
 
@@ -94,4 +104,137 @@ a.tile
     display: block;
     width: 100%;
     height: 100%;
+}
+
+table#portfolio-projects h2
+{
+    text-transform: none;
+    font-size: 2em;
+    display: block;
+}
+
+div#thismember-tile-container
+{
+    padding: 0;
+}
+
+div#thismember-tile-description p
+{
+    font-size: 1.1em;
+    padding-left: 1em;
+    margin-right: 1em;
+}
+
+div#thismember-tile-description
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    padding: 0;
+}
+
+div#thismember-tile-title
+{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 50%;
+    height: 50%;
+    padding: 0;
+}
+
+div#thismember-tile-title span
+{
+    display: block;
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
+div#thismember-tile-slider
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50%;
+    width: 50%;
+    padding: 0;
+    overflow: hidden;
+}
+
+img#thismember-tile-slider-img
+{
+    position: relative;
+}
+
+div#portfolio-divider-left
+{
+    width: 350px;
+    float: left;
+}
+
+div#portfolio-divider-right
+{
+    float: left;
+    width: 500px;
+}
+
+section#portfolio-text
+{
+    margin-top: 100px;
+    margin-left: 70px;
+}
+
+section#portfolio-text h2
+{
+    margin-top: 0;
+}
+
+div#raytracer-tile-container
+{
+    padding: 0;
+}
+
+span#raytracer-tile-title
+{
+    display: block;
+    margin-left: 1em;
+    font-size: 1.5em;
+}
+
+div.project-style-raytracer
+{
+    background-color: #3d00c9 !important; 
+}
+
+div#thismember-sections
+{
+    width: 70%;
+}
+
+div#raytracer-sections
+{
+    width: 50%;
+}
+
+div#raytracer-tile-top
+{
+    height: 94px;
+    width: 150px;
+    padding:0;
+    margin:0;
+    overflow: hidden;
+}
+
+div#raytracer-tile-top img
+{
+    position: relative;
+}
+
+span#raytracer-tile-title
+{
+    position: relative;
+    top: 15px;
+    left: 10px;
 }

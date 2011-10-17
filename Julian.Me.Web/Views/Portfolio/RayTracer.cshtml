@@ -1,0 +1,59 @@
+﻿<div id="raytracer-sections">
+    <section title="overview">
+        <p>
+            This is a raytracing engine without a special name that has been written fully in
+            C# using XNA. While XNA is of course good for 3D rendering, no actual rendering
+            is being done by XNA though, it's just used for the convenience of handling user
+            input and drawing the fully rendered frame to the screen as well as calling post-processing
+            shaders.</p>
+        <p>
+            It's real-time enough that you're able to fly through a fairly simple scene with
+            smooth framerates. As all things raytracing, it benefits greatly from having more
+            CPU cores.
+        </p>
+        <p>
+            The greatest challenge of this project was of course to make it run as fast as possible.
+            The natural question is of course why I didn't go with C or C++ for this. Well,
+            mostly because I know and like C# and was curious how well it could handle this.
+            I found out that it performed just fine and while I didn't have an identical version
+            of it written in C++ to compare it with, it seemed to run as well as another raytracer
+            that was written in C++ but that did not use SIMD instructions. In my experience,
+            the only thing that keeps a C# raytracer from running as fast as a C++ one is that
+            with C# you cannot vectorize your code leveraging SIMD instructions (SSE and such).
+            Which is a biggie because a C++ raytracer that does is able to process four rays
+            at the same time. Mono does offer Mono.SIMD and I hope that Microsoft will add some
+            way to work with SIMD as well in the future.
+        </p>
+        <p>
+            It's still fairly naieve though. The algorithm currently is a broad-sweep phase
+            of iterating through all scene objects per ray and doing a bounding-sphere intersection
+            check before checking the triangles of the scene objects individually. This is fast
+            for a small scene but doesn't scale to scenes with many objects or objects with
+            many triangles.
+        </p>
+        <h3>
+            Features implemented</h3>
+        <ul>
+            <li><strong>Triangles.</strong> Planes and triangles are the only primitives that are
+                supported. Rudimentary support for importing .OBJ model files.</li>
+            <li><strong>Soft-shadows.</strong> Normal lights cast harsh shadows but there is support
+                for area lights that cast a soft shadow. This works by giving those lights a volume
+                and doing multiple samples (up to 128 samples) per pixel from random points of origin
+                within that volume. Naturally, there's a huge performance penalty to this. I have
+                plans to move shadow rendering to the GPU, making them pretty much free.</li>
+            <li><strong>Reflections.</strong> Raytracers make doing reflections really easy so naturally
+                there's support for this! </li>
+            <li><strong>Interactive.</strong> As it's a real-time raytracer, you can fly around
+                freely in the scene and add lights and turn reflections on or off.</li>
+        </ul>
+    </section>
+    <section title="future work">
+    </section>
+    <section title="gallery">
+    </section>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#raytracer-sections').createTabs();
+    });
+</script>

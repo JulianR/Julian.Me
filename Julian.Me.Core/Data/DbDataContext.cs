@@ -5,6 +5,9 @@ using System.Text;
 using System.Data.Entity;
 using Julian.Me.Core.Models;
 using System.Data.Entity.Infrastructure;
+using Julian.Me.Core.Models.Base;
+using System.Data;
+using Julian.Me.Core.Security;
 
 namespace Julian.Me.Core.Data
 {
@@ -19,12 +22,6 @@ namespace Julian.Me.Core.Data
 
     public override int SaveChanges()
     {
-      var entries = this.ChangeTracker.Entries();
-
-      if (SavingChanges != null)
-      {
-        SavingChanges(this, entries);
-      }
 
       return base.SaveChanges();
     }

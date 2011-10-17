@@ -1,4 +1,4 @@
-﻿<div class="about-sections">
+﻿<div id="thismember-sections">
     <section title="overview">
         <p>
             ThisMember is a .NET 4 library that can perform mappings between similar - but different
@@ -24,11 +24,12 @@
         <p>
             ThisMember by default gets out of your way and doesn't complain too much about properties
             not getting mapped, unless you want it to. If configured like that, it will throw
-            an exception detailing the members on the destination object that do not get receive
-            a value from the source object, allowing you to test your mappings in a unit test.</p>
+            an exception detailing the members on the destination object that do not receive
+            a value from the source object, allowing you to test your mappings in a unit test,
+            hardening your application to changes.</p>
         <h3>
             Features</h3>
-        <ul id="features">
+        <ul class="portfolio-list">
             <li><strong>Easy to use.</strong> The API has been kept accessible and ThisMember gets
                 out of your way as much as possible by not forcing you to do anything, such as defining
                 all your mappings explicitly.</li>
@@ -83,6 +84,7 @@
 
         ]]>
         </script>
+  
         <h3>
             custom mappings</h3>
         <p>
@@ -122,6 +124,6 @@
 </div>
 <script type="text/javascript">
     $(function () {
-        $('div.about-sections').createTabs();
+        $('#thismember-sections').createTabs();
     });
 </script>

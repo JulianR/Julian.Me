@@ -3,46 +3,150 @@
 }
 <link href="@Url.Content("~/Content/shCore.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/shThemeDefault.css")" rel="stylesheet" type="text/css" />
-
-<div id="portfolio-slide-container">
-    <div id="portfolio-slide-padding">
-        <a href="#" id="back-arrow"></a>
-        @if (ViewBag.Project != null)
-        {
-            Html.RenderPartial((string)ViewBag.Project);
-        }
+@if (ViewBag.Project != null)
+{
+    <div id="portfolio-slide-container" class="project-style-@ViewBag.Project">
+        <div id="portfolio-slide-padding">
+            <a href="#" id="back-arrow"></a>
+            @{
+    Html.RenderPartial((string)ViewBag.Project);
+            }
+        </div>
     </div>
+}
+<div id="portfolio-divider-left">
+    <table id="portfolio-projects">
+        <tr>
+            <td colspan="2">
+                <div id="thismember-tile" class="tile">
+                    <a href="@Url.Action("Index", new { project = "thismember" })" class="tile" />
+                    @{
+                        Html.RenderPartial("ThisMemberTile");
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="raytracer-tile" class="tile">
+                    <a href="@Url.Action("Index", new { project = "raytracer" })" class="tile" />
+                    @{
+                        Html.RenderPartial("RayTracerTile");
+                    }
+                </div>
+            </td>
+            <td>
+                <div id="paginggrid-tile" class="tile">
+                    MvcPagingGrid
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="slimeolution-tile" class="tile">
+                    Slime-O-Lution
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
-<table id="portfolio-projects">
-    <tr>
-        <td colspan="2">
-            <div id="thismember-tile">
-                <a href="@Url.Action("Index", new { project = "thismember" })" class="tile" />ThisMember
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div id="raytracer-tile">
-                RayTracer
-            </div>
-        </td>
-        <td>
-            <div id="paginggrid-tile">
-                MvcPagingGrid
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <div id="slimeolution-tile" style="width: 304px;">
-                Slime-O-Lution
-            </div>
-        </td>
-    </tr>
-</table>
+<div id="portfolio-divider-right">
+    <section id="portfolio-text">
+        <h2>
+            projects</h2>
+        <p>
+            Over the years, I've done a lot of personal projects, out of interest (so for fun),
+            for school or for a problem that arose on the job for which I found a (free) solution
+            did not yet exist.
+        </p>
+        <p>
+            Usually, these projects die a swift death as other (shinier) things catch my eye
+            but on this page I've got some projects that either finished, currently ongoing
+            or unfinished but worth showing.
+        </p>
+        <p>
+            I like making things that produce a visual result, or that are demanding in terms
+            of performance and to heavily optimize those. The raytracer project being a prime
+            example of both. But I also enjoy making library type projects, meant for third-party
+            consumption, that expose a as simple as possible (but flexible) API, hiding all
+            internal complexity from the user.
+        </p>
+    </section>
+</div>
 <script type="text/javascript">
     $(function () {
+
+        var determineRotations = function(event, $this){
+
+           var offset = $this.offset();
+
+           var x = event.pageX;
+           var y = event.pageY;
+
+           var relativeX = x - offset.left;
+           var relativeY = y - offset.top;
+
+           var width = $this.width();
+           var height = $this.height();
+
+           var normalizedX = (relativeX / width) - 0.5;
+           var normalizedY = (relativeY / height) - 0.5;
+
+           var rotX = Math.floor(-2000 * normalizedY) / 100;
+           var rotY = Math.floor(2000 * normalizedX) / 100;
+
+           return { rotX: rotX, rotY: rotY };
+        };
+
+        var tiles = $('table#portfolio-projects div.tile');
+
+        tiles.mouseover(function(event){
+           var $this = $(this);
+           var rotation = determineRotations(event, $this);
+           $this.css('-webkit-transform', 'rotateX(' + rotation.rotX + 'deg) rotateY('+ rotation.rotY +'deg)');
+
+        });
+
+        tiles.mousedown(function(event){
+           var $this = $(this);
+           var rotation = determineRotations(event, $this);
+           $this.css('-webkit-transform', 'rotateX(' + rotation.rotX + 'deg) rotateY('+ rotation.rotY +'deg) translateZ(-20px)');
+        });
+
+
+        tiles.mouseup(function(event){
+           var $this = $(this);
+           var rotation = determineRotations(event, $this);
+           $this.css('-webkit-transform', 'rotateX(' + rotation.rotX + 'deg) rotateY('+ rotation.rotY +'deg) translateZ(0px)');
+
+        });
+
+        tiles.mouseleave(function(event){
+            var $this = $(this);
+            $this.css('-webkit-transform', 'rotateX(0deg) rotateY(0deg) translateZ(-0px)');
+        });
+
+        setTimeout(function(){
+
+            $('div#effect-layer').animate({
+                opacity: 1
+            }, 1000);
+
+        }, 1000);
+
+        $('a.tile').click(function(){
+        
+            var $this = $(this);
+
+            setTimeout(function(){
+            
+                window.location = $this.attr('href');
+            
+            }, 500);
+
+            return false;
+        
+        });
 
         $('body').css('overflow-x', 'hidden');
 
@@ -57,9 +161,9 @@
         @if (ViewBag.Project != null)
         {
         <text>
-        setTimeout(function () {
-            slidePortfolio('out');
-        }, 0);
+            setTimeout(function () {
+                slidePortfolio('out');
+            }, 0);
         </text>
         }   
 

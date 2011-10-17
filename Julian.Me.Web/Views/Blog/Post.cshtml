@@ -1,12 +1,20 @@
 ﻿@model Julian.Me.Web.Models.BlogPostModel
 <div id="blog-post-@Model.ID">
-  @if (Julian.Me.Web.Security.Client.User != null && Julian.Me.Web.Security.Client.User.IsAdmin)
-  { 
-    <a id="thismember-edit-index"></a>
-  }
-  <div class="blog-post-content">
-    <h2><a href="@Url.Action("index", new { date = Model.CreationTime.Month + "-" + Model.CreationTime.Year, postID = Model.ID })" >@Model.Title</a></h2>
-    <p class="blog-post-date">@Model.CreationTime.ToString("dd MMMM yyyy", Julian.Me.Web.CultureHelper.DateCulture)</p>
-    @(new MvcHtmlString(Server.HtmlDecode(Model.Body)))
-  </div>
+    @{
+        var loggedIn = false;
+    }
+    @if (Julian.Me.Core.Security.Client.User != null && Julian.Me.Core.Security.Client.User.IsAdmin)
+    {
+        loggedIn = true;
+    }
+    <div class="blog-post-content">
+        <h2>
+            <a href="@Url.Action("index", new { date = Model.CreationTime.Month + "-" + Model.CreationTime.Year, postID = Model.ID })" >@Model.Title</a></h2>
+            @if (loggedIn)
+            {
+                @Html.ActionLink("edit", "Edit", new { id = Model.ID })
+            }
+        <p class="blog-post-date">@Model.CreationTime.ToString("dd MMMM yyyy", Julian.Me.Web.CultureHelper.DateCulture)</p>
+        @(new MvcHtmlString(Model.Body))
+    </div>
 </div>
