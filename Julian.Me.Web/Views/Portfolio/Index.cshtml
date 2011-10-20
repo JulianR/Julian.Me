@@ -55,9 +55,9 @@
         <h2>
             projects</h2>
         <p>
-            Over the years, I've done a lot of personal projects, out of interest (so for fun),
-            for school or for a problem that arose on the job for which I found a (free) solution
-            did not yet exist.
+            Over the years, I've done a lot of personal projects; for fun, for school or for
+            a problem that arose on the job for which I found a (free) solution did not yet
+            exist.
         </p>
         <p>
             Usually, these projects die a swift death as other (shinier) things catch my eye
@@ -73,90 +73,12 @@
         </p>
     </section>
 </div>
+<script type="text/javascript" src="@Url.Content("~/Scripts/portfolio.js")"></script>
+<script src="@Url.Content("~/Scripts/shCore.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/shBrushCSharp.js")" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
-
-        var determineRotations = function(event, $this){
-
-           var offset = $this.offset();
-
-           var x = event.pageX;
-           var y = event.pageY;
-
-           var relativeX = x - offset.left;
-           var relativeY = y - offset.top;
-
-           var width = $this.width();
-           var height = $this.height();
-
-           var normalizedX = (relativeX / width) - 0.5;
-           var normalizedY = (relativeY / height) - 0.5;
-
-           var rotX = Math.floor(-2000 * normalizedY) / 100;
-           var rotY = Math.floor(2000 * normalizedX) / 100;
-
-           return { rotX: rotX, rotY: rotY };
-        };
-
-        var tiles = $('table#portfolio-projects div.tile');
-
-        tiles.mouseover(function(event){
-           var $this = $(this);
-           var rotation = determineRotations(event, $this);
-           $this.css('-webkit-transform', 'rotateX(' + rotation.rotX + 'deg) rotateY('+ rotation.rotY +'deg)');
-
-        });
-
-        tiles.mousedown(function(event){
-           var $this = $(this);
-           var rotation = determineRotations(event, $this);
-           $this.css('-webkit-transform', 'rotateX(' + rotation.rotX + 'deg) rotateY('+ rotation.rotY +'deg) translateZ(-20px)');
-        });
-
-
-        tiles.mouseup(function(event){
-           var $this = $(this);
-           var rotation = determineRotations(event, $this);
-           $this.css('-webkit-transform', 'rotateX(' + rotation.rotX + 'deg) rotateY('+ rotation.rotY +'deg) translateZ(0px)');
-
-        });
-
-        tiles.mouseleave(function(event){
-            var $this = $(this);
-            $this.css('-webkit-transform', 'rotateX(0deg) rotateY(0deg) translateZ(-0px)');
-        });
-
-        setTimeout(function(){
-
-            $('div#effect-layer').animate({
-                opacity: 1
-            }, 1000);
-
-        }, 1000);
-
-        $('a.tile').click(function(){
-        
-            var $this = $(this);
-
-            setTimeout(function(){
-            
-                window.location = $this.attr('href');
-            
-            }, 500);
-
-            return false;
-        
-        });
-
-        $('body').css('overflow-x', 'hidden');
-
-        $('a#back-arrow').click(function () {
-
-            slidePortfolio('in');
-
-            return false;
-
-        });
+        SyntaxHighlighter.all();
 
         @if (ViewBag.Project != null)
         {
@@ -166,13 +88,5 @@
             }, 0);
         </text>
         }   
-
-    });
-</script>
-<script src="@Url.Content("~/Scripts/shCore.js")" type="text/javascript"></script>
-<script src="@Url.Content("~/Scripts/shBrushCSharp.js")" type="text/javascript"></script>
-<script type="text/javascript">
-    $(function () {
-        SyntaxHighlighter.all();
     });
 </script>

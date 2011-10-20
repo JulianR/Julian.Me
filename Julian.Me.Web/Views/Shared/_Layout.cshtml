@@ -73,7 +73,7 @@
         </script>
     }
     <header>
-        <nav id="main-navigation">
+        <div id="main-navigation">
             <ul>
                 @SiteSectionLink("index", "home", "home")
                 @SiteSectionLink("index", "about", "about")
@@ -81,10 +81,8 @@
                 @SiteSectionLink("index", "blog", "blog", new { date = (DateTime?)null, postID = (int?)null })
                 @SiteSectionLink("index", "contact", "contact")
             </ul>
-        </nav>
+        </div>
     </header>
-    <div>
-        @RenderBody()
-    </div>
+    @RenderBody()
 </body>
 </html>

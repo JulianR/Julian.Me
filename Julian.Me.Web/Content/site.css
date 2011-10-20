@@ -2,6 +2,9 @@
 {
     font-family: segoeuil;
     src: url(fonts/segoeuil.woff);
+    font-weight: normal;
+    font-style: normal;
+
 }
 @font-face
 {
@@ -13,6 +16,9 @@
 {
     font-family: segoeui;
     src: url(fonts/segoeui.woff);
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 body
@@ -25,6 +31,7 @@ body
     font-weight: lighter;
     font-size: 13pt;
     line-height: 1.7em;
+    left: 0%;
 }
 
 
@@ -281,4 +288,15 @@ body.admin
 {
     background-color: #000;
     color: White;
+}
+
+span.image-caption
+{
+    font-style: italic;
+    display: block;
+}
+
+div.image-container div
+{
+    float: left;
 }

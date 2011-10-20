@@ -97,6 +97,8 @@
     <Content Include="Content\images\back-arrow-no-hover.png" />
     <Content Include="Content\images\back-arrow.png" />
     <Content Include="Content\images\raytracer-bg.png" />
+    <Content Include="Content\images\raytracer\light-distance.png" />
+    <Content Include="Content\images\raytracer\shadow-buffer.png" />
     <Content Include="Content\images\so.png" />
     <Content Include="Content\images\thismember-code.png" />
     <Content Include="Content\portfolio.css" />
@@ -112,6 +114,7 @@
     <Content Include="Scripts\jquery-1.6.1.js" />
     <Content Include="Scripts\jquery-1.6.1.min.js" />
     <Content Include="Scripts\jquery.animate-enhanced.min.js" />
+    <Content Include="Scripts\portfolio.js" />
     <Content Include="Scripts\Scripts.js" />
     <Content Include="Scripts\shBrushCSharp.js" />
     <Content Include="Scripts\shCore.js" />

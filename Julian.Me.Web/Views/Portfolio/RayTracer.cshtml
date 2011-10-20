@@ -48,6 +48,96 @@
         </ul>
     </section>
     <section title="future work">
+        <p>
+            This project was a great learning experience for me as it was my first encounter
+            with vector math. And as I love the simple and elegant concept of raytracing, I
+            definitely want to continue working on a project like this in the future.</p>
+        <p>
+            However, I'm running into some limitations with how it's set up. For one, it's not
+            very scalable as the ray-intersection algorithm is fairly naive and can't deal with
+            complex scenes or objects. For this, I need to implement an intersection algorithm
+            that uses a more scalable basis, such as an octree.
+        </p>
+        <h3>
+            SlimDX</h3>
+        <p>
+            And while working with XNA is a joy, it is a bit of a heavy dependency to take on
+            for something that just handles user input and that presents a rendered bitmap to
+            screen. I would like to start over with something that is based on <a href="http://slimdx.org/">
+                SlimDX</a>. I still need a framework like that to provide me access to the GPU,
+            to be able to work with shaders.
+        </p>
+        <h3>
+            GPU</h3>
+        <p>
+            I want to explore the potential of harnessing the GPU to a greater extent in this
+            rewrite. While the best performance might be had by moving the entire thing to the
+            GPU (through something like CUDA) that's not really where my interest lies and I
+            want to keep the core ray-intersection algorithm to the CPU, but have the GPU act
+            as the composer of what the CPU produces.
+        </p>
+        <h3>
+            Deferred rendering</h3>
+        <p>
+            It would in that sense be like a game engine (though those use rasterization rather
+            than raytracing) that uses <a href="http://en.wikipedia.org/wiki/Deferred_Rendering">
+                deferred rendering</a>: the engine renders everything to a collection of buffers
+            that are then composited to form the final frame that is shown on screen.
+        </p>
+        <p>
+            Except that in the case of my raytracer, the creation of those buffers (normals
+            buffer, depth buffer, shadow buffer, etc) is done by the CPU rather than a game
+            where mostly everything is done by the GPU.</p>
+        <h3>
+            Deferred soft shadowing</h3>
+        <p>
+            One example of what I want to try out is to render soft shadows in a shader on the
+            GPU rather than perform very expensive multi-ray sampling on the CPU.
+        </p>
+        <p>
+            The idea is that for every light within the scene, a texture of the scene is generated
+            (on the CPU) that provides information on how far away a given pixel is from the
+            light. An example of what that buffer looks like can be seen below. In it, the more
+            blue a pixel is, the closer it is to a light (or when fully blue it's hidden from
+            the light entirely). When we need to determine how "well-lit" a pixel needs to be,
+            we first sample the light-distance texture for that pixel. The further away a pixel
+            is from a light, the more diffuse the light would become. This distance that we
+            sample then determines how many samples and how far away from the given pixel we
+            then sample from the shadow buffer (see the second image). The average color of
+            all those samples will then be the color of the pixel. Overall, this should result
+            in a fairly realistic, soft shadow.
+        </p>
+        <p>
+            I do expect some difficulties with this approach, mainly that the wrong pixels will
+            be sampled in the shadow buffer, because what is near a pixel from the camera's
+            view is not necessarily anywhere near that pixel in the scene. But I expect that
+            it can be mostly worked around by involving the depth buffer or the normal buffer
+            as well.
+        </p>
+        <p>
+            Rendering artifacts aside, the benefit of this approach should be greatly improved
+            performance of soft shadows. The only cost here is extra memory writes as a result
+            from the need to fill up more buffers, and a higher memory bandwidth requirement
+            from having more textures. The GPU will do the softening of the shadow, but since
+            it is mostly idle anyway it will go unnoticed.
+        </p>
+        <img alt="the light distance buffer" src="@Url.Content("~/Content/images/raytracer/light-distance.png")" />
+        <span class="image-caption">The light-distance buffer for a light as seen by the camera.</span>
+        <img alt="the shadow buffer" src="@Url.Content("~/Content/images/raytracer/shadow-buffer.png")" />
+        <span class="image-caption">The shadow buffer for a light as seen by the camera.</span>
+        <h3>
+            Unification</h3>
+        <p>
+            The current implementation allows multiple kinds of "scene objects", but it comes
+            down to planes and meshes. As such, this involves some virtual method calls. The
+            same holds true for lights; there is support for point lights (harsh shadows) and
+            area lights (soft shadows). The plan is to unify this to avoid virtual method calls
+            and to simplify the rendering pipeline.
+        </p>
+        <p>
+            Initially, this meant that everything was now made up out of triangles. However
+            I want to investigate building a renderer that uses voxels instead of triangles.
+        </p>
     </section>
     <section title="gallery">
     </section>

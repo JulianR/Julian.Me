@@ -18,41 +18,59 @@ $.fn.createTabs = function () {
     $div.before('<ul class="tab-header"></ul>');
     var $ul = $('ul.tab-header').first();
     var tabId = 1;
-    var first = true;
+
+    var hash = window.location.hash.substring(1);
+
+    var first = !Boolean(hash);
+
     sections.each(function () {
         var $section = $(this);
         var title = $section.attr('title');
-        $ul.append("<li><h2><a id=\"tab-header-" + tabId + "\" href=\"#\">" + title + "</a></h2></li>");
+        $ul.append("<li><h2><a id=\"tab-header-" + tabId + "\" href=\"#" + title + "\">" + title + "</a></h2></li>");
         $section.attr('id', 'tab-' + tabId);
-        if (first) {
+        if (first || title == hash) {
             first = false;
             $section.addClass('active-tab');
         }
         return tabId++;
     });
-    first = true;
+
+    first = !Boolean(hash);
 
     $ul.find('a').each(function () {
         var $a = $(this);
 
-        if (first) {
+        if (first || $a.text() == hash) {
             first = false;
             $a.addClass('active-tab-header');
         }
 
-        return $a.click(function () {
+        $a.click(function () {
+
             $('.active-tab').removeClass('active-tab');
             $('.active-tab-header').removeClass('active-tab-header');
             var $this = $(this);
+
+
             $this.addClass('active-tab-header');
             var $section = $('#' + this.id.replace('tab-header', 'tab'));
             $section.addClass('active-tab');
 
-            $section.slideItemsIn();
+            window.location.hash = $this.text();
+
+            if ($section.hasClass('slideable')) {
+                $section.slideItemsIn();
+            }
 
             return false;
         });
     });
+
+    var activeSection = $('section.active-tab');
+
+    if (activeSection.hasClass('slideable')) {
+        activeSection.slideItemsIn();
+    }
 
     return this;
 };
@@ -116,39 +134,3 @@ $.fn.slideItemsIn = (function () {
     }
 })();
 
-
-var slidePortfolio = function (dir) {
-
-    var left;
-
-    if (dir === 'in') {
-        left = '0%';
-    } else {
-        left = '-100%';
-    }
-
-    if (supportsCssTransitions()) {
-        var body = $('body');
-
-        setTimeout(function () {
-            body.css('position', 'relative');
-
-            body.setTransition({
-                property: 'left',
-                'timing-function': 'ease-in',
-                duration: '0.3s'
-            });
-
-            body.css('left', left);
-        }, 0);
-
-    } else {
-        setTimeout(function () {
-            var body = $('body');
-            body.css('position', 'relative');
-            $('body').animate({
-                left: left
-            });
-        }, 0);
-    }
-};
