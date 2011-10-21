@@ -1,1 +1,31 @@
-﻿
+﻿@{
+    ViewBag.Title = "julian.me - home";
+}
+<section id="home-welcome">
+    <p>
+        Welcome,</p>
+    <p>
+        I am @Html.ActionLink("Julian Rooze", "Index", "About") and this is my personal
+        website.
+    </p>
+    <p>
+        It's currently very much a "work in progress" kind of thing, but I'm getting there.
+        There isn't a whole lot to see yet on this page, but feel free to look around.</p>
+    <p>
+        The eventual goal is to have everything here that is of interest to me or that tells
+        something about me. It's not my intention though to make this site very busy and
+        crowded. I want to keep it simple, sparse, fast and fun to use.
+    </p>
+    <p>
+        While browser compatibility is on my radar, the site does have the best experience
+        on a "modern" browser such as Firefox, Chrome, Safari, Opera or Interner Explorer
+        9. I'm aware of issues on Internet Explorer 7 and 8 and I'll have the site workable
+        on those browsers soon.</p>
+</section>
+
+<script type="text/javascript">
+    $(function () {
+        $('#home-welcome').slideItemsIn();
+    });
+
+</script>

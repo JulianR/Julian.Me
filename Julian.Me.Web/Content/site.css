@@ -24,7 +24,7 @@
 body
 {
     color: #222;
-    font-family: segoeuil, "Segoe UI" , Helvetica, sans-serif;
+    font-family: segoeuil, Segoe UI, Helvetica, sans-serif;
     cursor: default;
     padding: 2em;
     margin: 0;
@@ -58,10 +58,6 @@ a
 {
     color: inherit;
     text-decoration: none;
-}
-
-p a
-{
     font-weight: bold;
 }
 
@@ -98,6 +94,21 @@ h3
 img
 {
     border: 0;
+}
+
+h1 a
+{
+    font-weight: normal;
+}
+
+h2 a
+{
+    font-weight: normal;
+}
+
+h3 a
+{
+    font-weight: normal;
 }
 
 

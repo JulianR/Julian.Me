@@ -1,10 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "julian.me - portfolio";
 }
 <link href="@Url.Content("~/Content/shCore.css")" rel="stylesheet" type="text/css" />
 <link href="@Url.Content("~/Content/shThemeDefault.css")" rel="stylesheet" type="text/css" />
 @if (ViewBag.Project != null)
 {
+    ViewBag.Title = ViewBag.Project;
+
     <div id="portfolio-slide-container" class="project-style-@ViewBag.Project">
         <div id="portfolio-slide-padding">
             <a href="#" id="back-arrow"></a>

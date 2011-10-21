@@ -97,6 +97,9 @@
     <Content Include="Content\images\back-arrow-no-hover.png" />
     <Content Include="Content\images\back-arrow.png" />
     <Content Include="Content\images\raytracer-bg.png" />
+    <Content Include="Content\images\raytracer\gallery-1.png" />
+    <Content Include="Content\images\raytracer\gallery-2.png" />
+    <Content Include="Content\images\raytracer\gallery-4.png" />
     <Content Include="Content\images\raytracer\light-distance.png" />
     <Content Include="Content\images\raytracer\shadow-buffer.png" />
     <Content Include="Content\images\so.png" />
@@ -406,7 +409,6 @@
     <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Admin\Login.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
@@ -433,7 +435,6 @@
     </Content>
     <Content Include="Views\Blog\Post.cshtml" />
     <Content Include="packages.config" />
-    <Content Include="Views\ThisMember\Index.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Portfolio\Index.cshtml" />

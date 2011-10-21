@@ -1,27 +1,28 @@
-﻿<div id="raytracer-sections">
+﻿@{
+    ViewBag.Title = "RayTracer";
+}
+<div id="raytracer-sections">
     <section title="overview">
         <p>
-            This is a raytracing engine without a special name that has been written fully in
-            C# using XNA. While XNA is of course good for 3D rendering, no actual rendering
-            is being done by XNA though, it's just used for the convenience of handling user
-            input and drawing the fully rendered frame to the screen as well as calling post-processing
-            shaders.</p>
+            This is a <a href="http://en.wikipedia.org/wiki/Ray_tracing_%28graphics%29">raytracing</a>
+            engine without a special name that has been written fully in C# using XNA. While
+            XNA is of course good for 3D rendering, no actual rendering is being done by XNA,
+            it's just used for the convenience of handling user input and drawing the fully
+            rendered frame to the screen as well as compiling and calling post-processing shaders.</p>
         <p>
             It's real-time enough that you're able to fly through a fairly simple scene with
-            smooth framerates. As all things raytracing, it benefits greatly from having more
-            CPU cores.
+            smooth framerates. As with all things raytracing, it benefits greatly from having
+            more CPU cores.
         </p>
         <p>
             The greatest challenge of this project was of course to make it run as fast as possible.
             The natural question is of course why I didn't go with C or C++ for this. Well,
             mostly because I know and like C# and was curious how well it could handle this.
-            I found out that it performed just fine and while I didn't have an identical version
-            of it written in C++ to compare it with, it seemed to run as well as another raytracer
-            that was written in C++ but that did not use SIMD instructions. In my experience,
-            the only thing that keeps a C# raytracer from running as fast as a C++ one is that
-            with C# you cannot vectorize your code leveraging SIMD instructions (SSE and such).
-            Which is a biggie because a C++ raytracer that does is able to process four rays
-            at the same time. Mono does offer Mono.SIMD and I hope that Microsoft will add some
+            I found out that it performed pretty well. In my experience, the biggest bottleneck
+            that keeps a C# raytracer from running as fast as a C++ one is that with C# you
+            cannot vectorize your code leveraging SIMD instructions (SSE and such). Which is
+            a biggie because a C++ raytracer that does is able to process up to four rays at
+            the same time. Mono does offer Mono.SIMD and I hope that Microsoft will add some
             way to work with SIMD as well in the future.
         </p>
         <p>
@@ -45,6 +46,12 @@
                 there's support for this! </li>
             <li><strong>Interactive.</strong> As it's a real-time raytracer, you can fly around
                 freely in the scene and add lights and turn reflections on or off.</li>
+            <li><strong>Postprocessing effects.</strong> There is support for postprocessing effects
+                that can add things like <a href="http://en.wikipedia.org/wiki/Ambient_occlusion">ambient
+                    occlusion</a>, <a href="http://en.wikipedia.org/wiki/Depth_of_field">depth of field</a>
+                and <a href="http://en.wikipedia.org/wiki/Motion_blur">motion blur</a>. Though because
+                work has been moved to the future version they are
+                not in a functional state right now. </li>
         </ul>
     </section>
     <section title="future work">
@@ -135,11 +142,14 @@
             and to simplify the rendering pipeline.
         </p>
         <p>
-            Initially, this meant that everything was now made up out of triangles. However
+            Initially, this meant that everything would be made up out of triangles. However
             I want to investigate building a renderer that uses voxels instead of triangles.
         </p>
     </section>
     <section title="gallery">
+        <img src="@Url.Content("~/Content/images/raytracer/gallery-1.png")" />
+        <img src="@Url.Content("~/Content/images/raytracer/gallery-2.png")" />
+        <img src="@Url.Content("~/Content/images/raytracer/gallery-4.png")" />
     </section>
 </div>
 <script type="text/javascript">

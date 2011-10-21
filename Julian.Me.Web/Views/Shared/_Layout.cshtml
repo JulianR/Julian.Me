@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - julian.me</title>
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/site.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/contact.css")" />
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/about.css")" />
@@ -73,7 +73,7 @@
         </script>
     }
     <header>
-        <div id="main-navigation">
+        <nav id="main-navigation">
             <ul>
                 @SiteSectionLink("index", "home", "home")
                 @SiteSectionLink("index", "about", "about")
@@ -81,7 +81,7 @@
                 @SiteSectionLink("index", "blog", "blog", new { date = (DateTime?)null, postID = (int?)null })
                 @SiteSectionLink("index", "contact", "contact")
             </ul>
-        </div>
+        </nav>
     </header>
     @RenderBody()
 </body>

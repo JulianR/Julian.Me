@@ -1,10 +1,22 @@
 ﻿body.home
 {
-  background-color: #FFFFFF;
-  color: #222;
+    background-color: #FFFFFF;
+    color: #222;
+}
+
+section#home-welcome
+{
+    width: 60%;
 }
 
 body.home #main-navigation h1
 {
-  color: #999;
+    color: #999;
+}
+
+#home-welcome > *
+{
+    left: -20%;
+    opacity: 0;
+    position: relative;
 }
