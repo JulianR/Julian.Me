@@ -169,7 +169,10 @@ var Transition = global.Transition = function(element, supported){
 		transformPrefixes: ['-webkit-'        , '-moz-'        , '-o-'        , '-ms-']
 	};
 	this.style = getSupportedStyle(element, this.supported.prefixes);
-	this.supported.index = this.supported.prefixes.indexOf(this.style);
+
+    if(this.supported.prefixes.indexOf){
+	    this.supported.index = this.supported.prefixes.indexOf(this.style);
+    }
 }; global.Transition.prototype = {
 
 	map: {

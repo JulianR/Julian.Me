@@ -11,6 +11,24 @@
 
 };
 
+// http://blogs.msdn.com/b/giorgio/archive/2009/04/14/how-to-detect-ie8-using-javascript-client-side.aspx
+var isLegacyIE = (function () {
+
+    if (navigator.appName == 'Microsoft Internet Explorer') {
+
+        var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+
+        if (re.exec(navigator.userAgent) != null) {
+            var num = parseFloat(RegExp.$1);
+            return num < 9;
+        }
+    }
+
+    return false;
+
+})();
+
+
 $.fn.createTabs = function () {
     var $div = this;
     $div.addClass('tab-container');
@@ -95,6 +113,7 @@ $.fn.slideItemsIn = (function () {
     return function () {
         var delay = 0;
         var self = this;
+        var id = self.attr('id');
 
         setTimeout(function () {
 
@@ -102,15 +121,25 @@ $.fn.slideItemsIn = (function () {
 
             children.each(function () {
 
+                if (this.parentNode.tagName != "DIV" && this.parentNode.id != id) {
+                    return;
+                }
+
                 var child = $(this);
 
                 if (hasTransforms === false) {
 
+                    var animationOptions = {
+                        //opacity: 1,
+                        left: '0%'
+                    };
+
+                    if (!isLegacyIE) {
+                        animationOptions.opacity = 1;
+                    }
+
                     setTimeout(function () {
-                        child.animate({
-                            opacity: 1,
-                            left: '0%'
-                        }, 300);
+                        child.animate(animationOptions, 300);
                     }, delay);
 
                     delay += 70;

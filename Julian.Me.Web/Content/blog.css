@@ -45,7 +45,7 @@
 
 div.blog-posts
 {
-  width: 70%;
+  width: 80%;
   clear: both;
 }
 
@@ -60,6 +60,13 @@ div.blog-post-content h2
 {
   margin: 0;
   margin-top: 1em;
+}
+
+div.blog-post-content h3
+{
+    text-transform: uppercase;
+    font-family: segoeui;
+    font-size: 0.9em;
 }
 
 p.blog-post-date
